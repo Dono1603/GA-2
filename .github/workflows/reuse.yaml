@@ -1,0 +1,8 @@
+name: Reusable workflow example
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-workflow-ex4:
+    uses: ./.github/workflows/ex4.yml@main
