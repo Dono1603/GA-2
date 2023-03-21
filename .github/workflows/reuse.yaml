@@ -5,6 +5,6 @@ on:
 
 jobs:
   call-workflow-ex4:
-    uses: Dono1603/GA-2/github/workflows/ex4.yaml
+    uses: Dono1603/GA-2/github/workflows/ex4.yaml@main
     with:
       NODE_VERSION: 14
