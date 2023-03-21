@@ -29,7 +29,7 @@ jobs:
     - name: install npm    
       run: |
           npm install
-    - name: install npm    
+    - name: test npm    
       run: |
           npm test
    
