@@ -6,8 +6,8 @@ jobs:
   run-npm-install:
     strategy:
       matrix:
-        os: [ubuntu-latest, ubuntu-20.04]
-        node: [14, 'lts']
+        os: [ubuntu-latest, ubuntu-18.04]
+        node: [14, lts]
     runs-on: ${{ matrix.os }}
     steps:
         - name: checkout
