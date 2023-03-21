@@ -1,41 +1,26 @@
-name: npm test
+name: interact with Github API
 on: 
-  workflow_dispatch:
+  pull_request:
 
-env:
-  NODE_VERSION: '14'
-         
+env: 
+  MY_TOKEN: ${{ secrets.MY_TOKEN }}
+
 jobs:
-  job1:
+  create-issue:
+    outputs:
+      output1: ${{ steps.short_sha.outputs.short_sha }}
     runs-on: ubuntu-latest
-    name : job1
     steps:
-    - name: test 
-      uses: actions/checkout@v3
-    - name: test 2
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{env.NODE_VERSION}}
-    - name: install npm    
+    - id: short_sha
+      run: echo "short_sha=${{GITHUB_SHA::7}}" >> "$GITHUB_OUTPUT"
+    - name: interact with GH
       run: |
-          npm install
-          node -v
-          echo 'Env var ${{env.NODE_VERSION}}'
-  job2:
-    runs-on: ubuntu-latest
-    name : job2
-    steps:
-    - name: test 
-      uses: actions/checkout@v3
-    - name: test 2
-      uses: actions/setup-node@v3
-      with:
-        node-version: lts/*
-    - name: install npm    
-      run: |
-          npm install
-    - name: test npm    
-      run: |
-          npm test
-   
-   
+       curl --request POST \
+       --url https://api.github.com/repos/Dono1603/GA-2/issues \
+       --header 'authorization: Bearer ${{env.MY_TOKEN}}' \
+       --header 'content-type: application/json' \
+       --data '{
+          "title": "Automated issue for commit: ${{ steps.short_sha.outputs.sha_short }}",
+          "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ steps.short_sha.out  puts.sha_short }}_."
+          }' \
+       --fail
