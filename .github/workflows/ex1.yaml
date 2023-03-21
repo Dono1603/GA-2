@@ -20,7 +20,7 @@ jobs:
       run: |
           npm install
           node -v
-          echo 'Env var $NODE_VERSION'
+          echo 'Env var ${{env.NODE_VERSION}}'
   job2:
     runs-on: ubuntu-latest
     name : job2
