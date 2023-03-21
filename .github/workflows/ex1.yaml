@@ -1,6 +1,9 @@
 name: npm test
 on: 
   workflow_dispatch:
+
+env:
+  NODE_VERSION=14
          
 jobs:
   job1:
@@ -12,10 +15,12 @@ jobs:
     - name: test 2
       uses: actions/setup-node@v3
       with:
-        node-version: lts/*
+        node-version: ${{env.NODE_VERSION}}
     - name: install npm    
       run: |
           npm install
+          node -v
+          echo 'Env var $NODE_VERSION'
   job2:
     runs-on: ubuntu-latest
     name : job2
@@ -32,5 +37,7 @@ jobs:
     - name: test npm    
       run: |
           npm test
+    - name: |
+          echo 
    
    
