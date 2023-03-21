@@ -5,6 +5,7 @@ on:
       NODE_VERSION:
         required: true
         type: number
+        default: 14
 jobs:
   run-npm-test:
     runs-on: ubuntu-latest
