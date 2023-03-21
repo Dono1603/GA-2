@@ -5,4 +5,4 @@ on:
 
 jobs:
   call-workflow-ex4:
-    uses: ./.github/workflows/ex4.yml@main
+    uses: ./.github/workflows/ex4.yml
