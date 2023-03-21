@@ -4,8 +4,8 @@ on:
     inputs:
       NODE_VERSION:
         required: true
-        type: number
-        default: 14
+        type: string
+        default: '14'
 jobs:
   run-npm-test:
     runs-on: ubuntu-latest
@@ -15,7 +15,7 @@ jobs:
         - name : setup node
           uses: actions/setup-node@v3
           with:
-            node-version: ${{input.NODE_VERSION}}
+            node-version: ${{ input.NODE_VERSION }}
         - name: run test
           shell: bash
           run: |
